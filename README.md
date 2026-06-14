@@ -16,7 +16,7 @@ All code must be well documented. This means:
 - Comments to cite usage of AI, or other sources
 
 ## Codebase
-Includes all files created by your team to run this application.
+Includes all files created by your team to run your application. (e.g. index.html and style.css)
 
 ## Where should I start? 
 If you have never done web development before, check out some resources below to get started. It is best to work in a team, and if you do feel free to split up the learning. Have one member learn HTML, one member learn CSS, and one member learn JavaScript. Then come together to make an awesome website! *These are just suggestions, the only required tool for you to use is github, where you will submit your project*
