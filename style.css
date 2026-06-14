@@ -1,0 +1,196 @@
+/* ============================================================
+   style.css — Styling for My Little Store
+   
+   HOW CSS WORKS:
+   Each block picks an element (like .navbar or h2) and sets
+   visual properties for it (color, size, spacing, etc.).
+   ============================================================ */
+
+
+/* --- GLOBAL STYLES (applies to everything on the page) --- */
+
+body {
+  font-family: Arial, sans-serif;  /* clean, readable font */
+  background-color: #f5f5f5;       /* light grey background */
+  color: #333;                     /* dark grey text (easier on the eyes than pure black) */
+  margin: 0;                       /* remove default browser spacing */
+  padding: 0;
+}
+
+h2 {
+  color: #2c7a2c;   /* dark green for section headings */
+}
+
+
+/* --- NAVIGATION BAR (the bar at the very top) --- */
+
+.navbar {
+  background-color: #2c7a2c;   /* green bar */
+  color: white;
+  padding: 12px 24px;
+  display: flex;                /* puts items side by side */
+  align-items: center;          /* vertically center them */
+  justify-content: space-between; /* logo on left, menu on right */
+}
+
+.store-name {
+  margin: 0;
+  font-size: 22px;
+}
+
+
+/* --- DROPDOWN MENU --- */
+
+/* The wrapper div — "position: relative" lets us position
+   the dropdown menu exactly below this button */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  background-color: white;
+  color: #2c7a2c;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;    /* shows a hand cursor on hover */
+}
+
+.dropdown-button:hover {
+  background-color: #e8f5e8;
+}
+
+/* The box of links that appears when you click the button */
+.dropdown-menu {
+  position: absolute;   /* floats over the page content below */
+  right: 0;             /* aligned to the right edge of the button */
+  top: 100%;            /* appears just below the button */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);  /* subtle drop shadow */
+  z-index: 100;         /* makes sure it floats above other content */
+}
+
+/* Each link inside the dropdown */
+.dropdown-menu a {
+  display: block;        /* each link takes a full row */
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none; /* removes the underline */
+  cursor: pointer;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* --- PAGES (the main content area) --- */
+
+.page {
+  max-width: 700px;    /* don't stretch too wide on big screens */
+  margin: 32px auto;   /* center it horizontally, add space at top */
+  background: white;
+  padding: 28px 32px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* The "hidden" class — JavaScript adds/removes this to show/hide pages */
+.hidden {
+  display: none;
+}
+
+
+/* --- PRODUCT CARDS (on the Home page) --- */
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;      /* wrap to next line if needed */
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.product-card {
+  background-color: #e8f5e8;
+  border: 1px solid #b2d8b2;
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-size: 18px;
+  flex: 1 1 140px;      /* each card is at least 140px wide */
+  text-align: center;
+}
+
+
+/* --- ORDER FORM (on the Place an Order page) --- */
+
+/* Style every label in the form */
+form label {
+  display: block;        /* each label goes on its own line */
+  margin-top: 16px;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Style every text input and the textarea */
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;  /* keeps width from overflowing */
+}
+
+form textarea {
+  height: 80px;
+  resize: vertical;   /* let users drag to resize if they want */
+}
+
+/* The submit button */
+form button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  background-color: #2c7a2c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #1e5c1e;
+}
+
+/* The green success message that appears after submitting */
+.success-message {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+
+/* --- ORDER CARDS (on the View Orders page) --- */
+
+.order-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  line-height: 1.8;    /* extra space between each line */
+}
+
+.no-orders {
+  color: #888;
+  font-style: italic;
+}

@@ -1,0 +1,257 @@
+<!-- Welcome to HTML. It is a programming language that web browsers like google understand and interpret to create webpages-->
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>My Little Store</title>
+
+  <!-- This line links our CSS file so the page looks nice -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body> <!-- HTML is full of "tags", <body> is a tag, and they are used to seperate sections of code-->
+
+  <!-- ========== NAVIGATION BAR (top of the page) ========== -->
+  <nav class="navbar">
+    <h1 class="store-name">My Little Store</h1>
+
+    <!-- Dropdown Menu -->
+    <div class="dropdown">
+      <button class="dropdown-button">Menu</button>
+
+      <!-- These links show/hide when you click the button above -->
+      <div class="dropdown-menu" id="dropdownMenu">
+        <!-- onclick="showPage(...)" calls a JavaScript function below -->
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('order')">Place an Order</a>
+        <a onclick="showPage('orders')">View Orders</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ========== HOME PAGE ========== -->
+  <!-- Each "page" is just a <div> that we show or hide with JavaScript -->
+  <div id="page-home" class="page">
+    <h2>Welcome to My Little Store!</h2>
+    <p>Use the menu above to place an order or view past orders.</p>
+
+    <div class="product-grid">
+      <div class="product-card">Apples — $1.50</div>
+      <div class="product-card">Bread — $2.99</div>
+      <div class="product-card">Cheese — $4.00</div>
+      <div class="product-card">Milk — $3.25</div>
+    </div>
+  </div>
+
+
+  <!-- ========== ORDER FORM PAGE ========== -->
+  <div id="page-order" class="page hidden">
+    <h2>Place an Order</h2>
+    <p>Fill out the form below and click "Submit Order".</p>
+
+    <!-- This is the order form -->
+    <!-- We use onsubmit to call our JavaScript when the user submits -->
+    <form onsubmit="submitOrder(event)">
+
+      <label>Your Name:</label>
+      <input type="text" id="customerName" placeholder="e.g. Jane Smith" required />
+
+      <label>Item to Order:</label>
+      <input type="text" id="itemName" placeholder="e.g. Apples" required />
+
+      <label>Quantity:</label>
+      <input type="number" id="quantity" placeholder="e.g. 3" min="1" required />
+
+      <label>Special Instructions (optional):</label>
+      <textarea id="instructions" placeholder="e.g. No nuts please"></textarea>
+
+      <button type="submit">Submit Order</button>
+    </form>
+
+    <!-- This message is hidden until an order is submitted -->
+    <p id="successMessage" class="success-message hidden">
+      Order submitted! Go to "View Orders" to see it.
+    </p>
+  </div>
+
+
+  <!-- ========== VIEW ORDERS PAGE ========== -->
+  <div id="page-orders" class="page hidden">
+    <h2>Past Orders</h2>
+    <p>Here are all the orders that have been placed:</p>
+
+    <!-- Orders will be added here by JavaScript -->
+    <div id="ordersList">
+      <p class="no-orders">No orders yet! Go place one.</p>
+    </div>
+  </div>
+
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <!-- All the logic lives down here, so the HTML above stays clean -->
+  <script>
+
+    // -------------------------------------------------------
+    // PART 1: SHOW / HIDE PAGES
+    // -------------------------------------------------------
+
+    // This function is called when the user clicks a menu link.
+    // It hides ALL pages, then shows only the one they picked.
+    function showPage(pageName) {
+
+      // Get every element with the class "page"
+      var allPages = document.querySelectorAll('.page');
+
+      // Loop through them and add the "hidden" class to each one
+      for (var i = 0; i < allPages.length; i++) {
+        allPages[i].classList.add('hidden');
+      }
+
+      // Now remove "hidden" from JUST the page we want to show
+      document.getElementById('page-' + pageName).classList.remove('hidden');
+
+      // Also close the dropdown menu after clicking a link
+      closeDropdown();
+
+      // If they went to the orders page, refresh the list
+      if (pageName === 'orders') {
+        displayOrders();
+      }
+    }
+
+
+    // -------------------------------------------------------
+    // PART 2: DROPDOWN MENU TOGGLE
+    // -------------------------------------------------------
+
+    // This runs when you click the "Menu" button
+    document.querySelector('.dropdown-button').addEventListener('click', function () {
+      var menu = document.getElementById('dropdownMenu');
+
+      // If it's hidden, show it. If it's showing, hide it.
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+      } else {
+        menu.classList.add('hidden');
+      }
+    });
+
+    // Helper to close the dropdown
+    function closeDropdown() {
+      document.getElementById('dropdownMenu').classList.add('hidden');
+    }
+
+    // Close the dropdown if the user clicks anywhere else on the page
+    document.addEventListener('click', function (event) {
+      var dropdown = document.querySelector('.dropdown');
+      if (!dropdown.contains(event.target)) {
+        closeDropdown();
+      }
+    });
+
+
+    // -------------------------------------------------------
+    // PART 3: SAVING ORDERS WITH localStorage
+    // -------------------------------------------------------
+    // localStorage is like a small notepad built into the browser.
+    // It saves information even after you close the tab!
+    // We store a LIST (array) of orders as text (JSON).
+
+    // This runs when the form is submitted
+    function submitOrder(event) {
+      // Prevent the page from reloading (default form behavior)
+      event.preventDefault();
+
+      // Read what the user typed into each field
+      var name     = document.getElementById('customerName').value;
+      var item     = document.getElementById('itemName').value;
+      var qty      = document.getElementById('quantity').value;
+      var notes    = document.getElementById('instructions').value;
+
+      // Build an "order" object — like a little package of info
+      var newOrder = {
+        customer: name,
+        item:     item,
+        quantity: qty,
+        notes:    notes,
+        date:     new Date().toLocaleString()   // today's date & time
+      };
+
+      // Load any orders that were already saved
+      var existingOrders = loadOrders();
+
+      // Add the new order to that list
+      existingOrders.push(newOrder);
+
+      // Save the updated list back to localStorage
+      // JSON.stringify turns the array into text so we can store it
+      localStorage.setItem('storeOrders', JSON.stringify(existingOrders));
+
+      // Clear the form fields so it's ready for the next order
+      document.getElementById('customerName').value = '';
+      document.getElementById('itemName').value     = '';
+      document.getElementById('quantity').value     = '';
+      document.getElementById('instructions').value = '';
+
+      // Show the success message
+      document.getElementById('successMessage').classList.remove('hidden');
+
+      // Hide the success message after 3 seconds
+      setTimeout(function () {
+        document.getElementById('successMessage').classList.add('hidden');
+      }, 3000);
+    }
+
+    // Loads orders from localStorage.
+    // Returns an empty array [] if nothing is saved yet.
+    function loadOrders() {
+      var saved = localStorage.getItem('storeOrders');
+
+      if (saved === null) {
+        return [];   // nothing saved yet
+      }
+
+      // JSON.parse turns the saved text back into an array
+      return JSON.parse(saved);
+    }
+
+
+    // -------------------------------------------------------
+    // PART 4: DISPLAYING SAVED ORDERS
+    // -------------------------------------------------------
+
+    function displayOrders() {
+      var orders = loadOrders();
+      var container = document.getElementById('ordersList');
+
+      // If there are no orders, show a friendly message
+      if (orders.length === 0) {
+        container.innerHTML = '<p class="no-orders">No orders yet! Go place one.</p>';
+        return;
+      }
+
+      // Otherwise, build a card for each order
+      var html = '';
+
+      for (var i = 0; i < orders.length; i++) {
+        var o = orders[i];   // shorthand for the current order
+
+        html += '<div class="order-card">';
+        html += '<strong>Order #' + (i + 1) + '</strong><br>';
+        html += 'Customer: '  + o.customer + '<br>';
+        html += 'Item: '      + o.item     + '<br>';
+        html += 'Quantity: '  + o.quantity + '<br>';
+        html += 'Notes: '     + (o.notes || 'None') + '<br>';
+        html += 'Date: '      + o.date     + '<br>';
+        html += '</div>';
+      }
+
+      container.innerHTML = html;
+    }
+
+  </script>
+
+</body>
+</html>
