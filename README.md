@@ -49,3 +49,6 @@ Artificial intelligence is an extraordinary tool in Software Development. It is 
   - Action - Generate me two files, an HTML file with JS in it, and a CSS file for styling. Create whatever you need to save the data.
   - Goal - These should be some example files that a highschooler with no Computer Science background could look at and begin to understand. Keep it very simple, do not worry too much about code quality, just keep it human readable.
 
+
+## In Summary
+HAVE FUN!! The main goal of this competition is to get started with development, learn about web pages, and hopefully make something you can be proud of. Use the links above to start learning. Use AI where you can to explain ideas, and to help you code. Also refer to the index.html and style.css files as examples of what your files may look like (Keep your eye out for any errors the AI may have made). 
