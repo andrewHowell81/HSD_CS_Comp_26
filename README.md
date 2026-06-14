@@ -1,5 +1,5 @@
 # HSD_CS_Comp_26
-This is an example repository for the Computer Science Competition in High School Design 2026. Below are in depth explanations of what your project submission for HSD should look like.
+This is an example repository for the Computer Science Competition in High School Design 2026. Below are some explanations of what your project submission for HSD should look like. There are also resources for getting started with web development if you are interested.
 
 ## README.md
 Your github repository should include a README.md that explains your application. This should include:
@@ -18,8 +18,8 @@ All code must be well documented. This means:
 ## Codebase
 Includes all files created by your team to run this application.
 
-## Where should I start?
-If you have never done web development before, check out some resources below to get started. It is best to work in a team, and if you do feel free to split up the learning. Have one member learn HTML, one member learn CSS, and one member learn JavaScript. Then come together to make an awesome website!
+## Where should I start? 
+If you have never done web development before, check out some resources below to get started. It is best to work in a team, and if you do feel free to split up the learning. Have one member learn HTML, one member learn CSS, and one member learn JavaScript. Then come together to make an awesome website! *These are just suggestions, the only required tool for you to use is github, where you will submit your project*
 
 ### VS Code
 VS code is a standard IDE (integrated development environment). Software engineers use VS Code to edit their code files. Think of it like
@@ -44,7 +44,8 @@ Here are some instruction on how to get started with github: https://www.youtube
 
 ### How to use AI to code?
 Artificial intelligence is an extraordinary tool in Software Development. It is a resource that you should use, however you should use it with caution. Make sure you understand what the AI is doing so that you can check its work. But if used correctly it can really improve your development process. Below are some tips for using AI to its fullest.
-- Writing a prompt: When writing a prompt give the AI as much context as possible to help it understand what you are asking of it. A great place to start is with the TAG method.
-Task - I am just starting with web development and need a basic skeleton HTML page to get me started. The web page should be a store front application. I want the page to have a drop down menu, and also a section to fill out a form. I want the form to save data somehow that can then be displayed on a separate page of the storefront application.
-Action - Generate me two files, an HTML file with JS in it, and a CSS file for styling. Create whatever you need to save the data.
-Goal - This should be some example files that a highschooler with no Computer Science background could look at and begin to understand. Keep it very simple, do not worry too much about code quality, just keep it human readable.
+- Writing a prompt: When writing a prompt give the AI as much context as possible to help it understand what you are asking of it. A great place to start is with the TAG method. Give the AI a Task, Action, and a Goal. Below is the breakdown of a prompt I used to create the index.html, and style.css files in this repo. I then hosted the website using githubs built in pages feature and you can view it here: https://andrewhowell81.github.io/HSD_CS_Comp_26/ 
+  - Task - I am just starting with web development and need a basic skeleton HTML page to get me started. The web page should be a store front application. I want the page to have a drop down menu, and also a section to fill out a form. I want the form to save data somehow that can then be displayed on a separate page of the storefront application.
+  - Action - Generate me two files, an HTML file with JS in it, and a CSS file for styling. Create whatever you need to save the data.
+  - Goal - These should be some example files that a highschooler with no Computer Science background could look at and begin to understand. Keep it very simple, do not worry too much about code quality, just keep it human readable.
+
